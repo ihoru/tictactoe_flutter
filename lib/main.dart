@@ -1,4 +1,4 @@
-import 'dart:developer';
+// import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:touchable/touchable.dart';
@@ -63,6 +63,7 @@ class _MainPageState extends State<MainPage> {
             Expanded(
               child: Center(
                 child: CanvasTouchDetector(
+                  gesturesToOverride: const [GestureType.onTapDown],
                   builder: (context) => CustomPaint(
                     size: const Size(300, 300),
                     painter: GameFieldPainter(context, game, gameMakeTurn),
@@ -291,7 +292,7 @@ class GameFieldPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     // TODO: why does it execute so often on "Restart"
-    log('paint');
+    // log('paint');
     var tCanvas = TouchyCanvas(context, canvas);
     int gameFieldSize = game.fieldSize;
     Size cellSize = size / gameFieldSize.toDouble();
@@ -331,7 +332,6 @@ class GameFieldPainter extends CustomPainter {
       }
     }
     if (game.winner != '') {
-      log('winningLineType: ${game.winningLineType}, winningLineNumber: ${game.winningLineNumber}');
       Offset p1, p2;
       switch (game.winningLineType) {
         case GameWinningLineType.row:
