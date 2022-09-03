@@ -1,8 +1,8 @@
 cmake_minimum_required(VERSION 3.10)
 project(runner LANGUAGES CXX)
 
-set(BINARY_NAME "tictactoe")
-set(APPLICATION_ID "com.example.tictactoe")
+set(BINARY_NAME "TicTacToe Duel")
+set(APPLICATION_ID "su.iho.tictactoe")
 
 cmake_policy(SET CMP0063 NEW)
 

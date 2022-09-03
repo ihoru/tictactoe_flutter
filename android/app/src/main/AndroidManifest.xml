@@ -1,7 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.tictactoe">
-   <application
-        android:label="tictactoe"
+    package="su.iho.tictactoe">
+
+    <application
+        android:label="TicTacToe Duel"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
