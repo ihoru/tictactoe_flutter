@@ -12,7 +12,7 @@ class TicTacToeApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const appTitle = 'TicTacToe';
+    const appTitle = 'TicTacToe Duel';
     return MaterialApp(
       title: appTitle,
       theme: ThemeData(

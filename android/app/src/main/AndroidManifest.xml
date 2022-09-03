@@ -2,7 +2,7 @@
     package="su.iho.tictactoe">
 
     <application
-        android:label="TicTacToe"
+        android:label="TicTacToe Duel"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
