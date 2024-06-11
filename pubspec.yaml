@@ -2,22 +2,22 @@ name: TicTacToe
 description: Simple TicTacToe game for 2 players on one screen
 publish_to: 'none'
 
-version: 1.0.0+1
+version: 1.1.0+2
 
 environment:
-  sdk: ">=2.16.2 <3.3.0"
+  sdk: '>=3.3.3 <4.0.0'
 
 dependencies:
   flutter:
     sdk: flutter
-  cupertino_icons: ^1.0.5
+  cupertino_icons: ^1.0.6
   touchable: ^1.0.2 # for easy gesture detection on canvas
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.1
-  flutter_launcher_icons: ^0.10.0
+  flutter_lints: ^3.0.2
+  flutter_launcher_icons: ^0.13.1
 
 flutter:
   uses-material-design: true
