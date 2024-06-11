@@ -8,7 +8,7 @@ void main() {
 }
 
 class TicTacToeApp extends StatelessWidget {
-  const TicTacToeApp({Key? key}) : super(key: key);
+  const TicTacToeApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class TicTacToeApp extends StatelessWidget {
 }
 
 class MainPage extends StatefulWidget {
-  const MainPage({Key? key, required this.title}) : super(key: key);
+  const MainPage({super.key, required this.title});
 
   final String title;
 
@@ -113,7 +113,7 @@ class _MainPageState extends State<MainPage> {
 }
 
 class RestartButton extends StatelessWidget {
-  const RestartButton({Key? key, required this.onPressed}) : super(key: key);
+  const RestartButton({super.key, required this.onPressed});
 
   final VoidCallback? onPressed;
 
@@ -130,7 +130,7 @@ class RestartButton extends StatelessWidget {
 }
 
 class GameStatusText extends StatelessWidget {
-  GameStatusText({Key? key, required this.statusText}) : super(key: key);
+  GameStatusText({super.key, required this.statusText});
 
   String statusText;
 
@@ -143,8 +143,8 @@ class GameStatusText extends StatelessWidget {
 }
 
 class UpsideDown extends RotatedBox {
-  const UpsideDown({Key? key, required Widget child})
-      : super(key: key, child: child, quarterTurns: 2);
+  const UpsideDown({super.key, required Widget super.child})
+      : super(quarterTurns: 2);
 }
 
 enum GameWinningLineType { row, column, diagonal }
@@ -239,6 +239,7 @@ class Game {
     if (player != null) {
       return [player, GameWinningLineType.diagonal, 1];
     }
+    return null;
   }
 
   List<List<String>> transposeField() {
