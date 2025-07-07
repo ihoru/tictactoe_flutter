@@ -287,37 +287,46 @@ class Game {
 }
 
 class GameFieldPainter extends CustomPainter {
-  GameFieldPainter(this.context, this.game, this.makeTurn) : super();
+  GameFieldPainter(this.context, this.game, this.makeTurn) : super() {
+    _initializePaints();
+  }
 
   final BuildContext context;
   final Game game;
   final Function makeTurn;
 
-  Paint get _cellPaint => Paint()
-    ..color = Theme.of(context).brightness == Brightness.dark 
-        ? Colors.white70 
-        : Colors.black87
-    ..style = PaintingStyle.stroke
-    ..strokeWidth = 2;
+  late Paint _cellPaint;
+  late Paint _valuePaint;
+  late Paint _winPaint;
+  late Paint _transparentPaint;
 
-  Paint get _valuePaint => Paint()
-    ..color = Theme.of(context).brightness == Brightness.dark 
-        ? Colors.redAccent 
-        : Colors.red
-    ..style = PaintingStyle.stroke
-    ..strokeWidth = 4;
+  void _initializePaints() {
+    _cellPaint = Paint()
+      ..color = Theme.of(context).brightness == Brightness.dark 
+          ? Colors.white70 
+          : Colors.black87
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 2;
 
-  Paint get _winPaint => Paint()
-    ..color = Theme.of(context).brightness == Brightness.dark
-        ? Colors.yellow
-        : Colors.black87
-    ..style = PaintingStyle.stroke
-    ..strokeWidth = 10;
+    _valuePaint = Paint()
+      ..color = Theme.of(context).brightness == Brightness.dark 
+          ? Colors.redAccent 
+          : Colors.red
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 4;
+
+    _winPaint = Paint()
+      ..color = Theme.of(context).brightness == Brightness.dark
+          ? Colors.yellow
+          : Colors.black87
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 10;
+
+    _transparentPaint = Paint()..color = Colors.transparent;
+  }
 
   @override
   void paint(Canvas canvas, Size size) {
-    // TODO: why does it execute so often on "Restart"
-    // log('paint');
     var tCanvas = TouchyCanvas(context, canvas);
     int gameFieldSize = game.fieldSize;
     Size cellSize = size / gameFieldSize.toDouble();
@@ -337,7 +346,7 @@ class GameFieldPainter extends CustomPainter {
           // draw transparent but tappable Rect
           tCanvas.drawRect(
             rect,
-            Paint()..color = Colors.transparent,
+            _transparentPaint,
             onTapDown: (tapDetail) => makeTurn(j, i),
           );
         }
@@ -387,6 +396,21 @@ class GameFieldPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(GameFieldPainter oldDelegate) {
-    return game != oldDelegate.game;
+    // Compare actual game state instead of object references
+    if (game.turn != oldDelegate.game.turn) return true;
+    if (game.winner != oldDelegate.game.winner) return true;
+    if (game.winningLineType != oldDelegate.game.winningLineType) return true;
+    if (game.winningLineNumber != oldDelegate.game.winningLineNumber) return true;
+
+    // Compare field contents
+    for (int i = 0; i < game.fieldSize; i++) {
+      for (int j = 0; j < game.fieldSize; j++) {
+        if (game.field[i][j] != oldDelegate.game.field[i][j]) {
+          return true;
+        }
+      }
+    }
+
+    return false;
   }
 }
