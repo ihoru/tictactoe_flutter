@@ -17,7 +17,23 @@ class TicTacToeApp extends StatelessWidget {
       title: appTitle,
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        brightness: Brightness.light,
+        scaffoldBackgroundColor: Colors.white,
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.blue,
+          foregroundColor: Colors.white,
+        ),
       ),
+      darkTheme: ThemeData(
+        primarySwatch: Colors.blue,
+        brightness: Brightness.dark,
+        scaffoldBackgroundColor: Colors.grey[900],
+        appBarTheme: AppBarTheme(
+          backgroundColor: Colors.grey[850],
+          foregroundColor: Colors.white,
+        ),
+      ),
+      themeMode: ThemeMode.system,
       home: const MainPage(title: appTitle),
     );
   }
@@ -277,16 +293,24 @@ class GameFieldPainter extends CustomPainter {
   final Game game;
   final Function makeTurn;
 
-  final _cellPaint = Paint()
-    ..color = Colors.black
+  Paint get _cellPaint => Paint()
+    ..color = Theme.of(context).brightness == Brightness.dark 
+        ? Colors.white70 
+        : Colors.black87
     ..style = PaintingStyle.stroke
     ..strokeWidth = 2;
-  final _valuePaint = Paint()
-    ..color = Colors.red
+
+  Paint get _valuePaint => Paint()
+    ..color = Theme.of(context).brightness == Brightness.dark 
+        ? Colors.redAccent 
+        : Colors.red
     ..style = PaintingStyle.stroke
     ..strokeWidth = 4;
-  final _winPaint = Paint()
-    ..color = Colors.blue
+
+  Paint get _winPaint => Paint()
+    ..color = Theme.of(context).brightness == Brightness.dark
+        ? Colors.yellow
+        : Colors.black87
     ..style = PaintingStyle.stroke
     ..strokeWidth = 10;
 
