@@ -2,7 +2,7 @@ name: TicTacToe
 description: Simple TicTacToe game for 2 players on one screen
 publish_to: 'none'
 
-version: 1.2.0
+version: 1.2.0+3
 
 environment:
   sdk: '>=3.3.3 <4.0.0'
